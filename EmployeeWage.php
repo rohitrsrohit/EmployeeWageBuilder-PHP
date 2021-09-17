@@ -16,22 +16,22 @@ class EmployeeWage
 
          $random = rand(0,1);
 
-         //Calculating employee daily wage
-         if($random == $IS_FULL_TIME)
+         //Calculating employee daily wage using Switch case statement
+         switch ($random)
          {
-            print "Employee Is Present For Full Time";
-            $dailyWage = $WAGE_PER_HOUR * $FULL_WORK_HOUR;
-            print " Daily Wage: ".$dailyWage;
-         }
-         elseif($random == $IS_PART_TIME)
-         {
-             print "Employee Is Present For Part Time";
-             $dailyWage = $WAGE_PER_HOUR * $PART_WORK_WAGE;
-             print " Daily Wage :" .$dailyWage;
-         }
-         else 
-         {
-            print "Employee Is Absent";
+            case $IS_FULL_TIME:
+                print "Employee Is Present For Full Time";
+                $dailyWage = $WAGE_PER_HOUR * $FULL_WORK_HOUR;
+                print " Daily Wage: ".$dailyWage;
+                break;
+            case $IS_PART_TIME :
+                print "Employee Is Present For Part Time";
+                $dailyWage = $WAGE_PER_HOUR * $PART_WORK_WAGE;
+                print " Daily Wage :" .$dailyWage;
+                break;
+            default:
+                print "Employee Is Absent";
+                break;
          }
             
      }
