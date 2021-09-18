@@ -46,6 +46,7 @@ class EmployeeWage
      }
 }
 
-#Calling the static function using the class.
-EmployeeWage::calcEmployeeWage();
+#Calling the function by using object.
+$empWage = new EmployeeWage();
+$empWage -> calcEmployeeWage();
 ?>
