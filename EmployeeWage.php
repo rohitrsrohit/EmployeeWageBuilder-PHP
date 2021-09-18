@@ -15,6 +15,7 @@ class EmployeeWage
          $empHrs = 0;
          $dailyWage = 0;
          $totalWage = 0;
+         $totalWorkingHours = 0;
         
          //Calculating employee daily wage using Switch case statement
          for ($i=0; $i < $WORKING_DAYS ; $i++) 
@@ -31,10 +32,17 @@ class EmployeeWage
                 default:
                     $empHrs = 0;
             }
+
+            //Calculationg Wage Till A Condition
+            if ($totalWorkingHours >= 100 || $i == 20) 
+            {
+                break;
+            }
             $dailyWage = $WAGE_PER_HOUR * $empHrs;
             $totalWage += $dailyWage;
+            $totalWorkingHours += $empHrs;
          }
-         echo "Salary Per month: " .$totalWage;  
+         echo "Total Working Days: " .$i. " Total Working Hours: " .$totalWorkingHours. ","."Salary Per Month: " .$totalWage;  
      }
 }
 
