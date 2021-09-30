@@ -1,28 +1,50 @@
 <?php
+include 'EmployeeDetails.php';
 class EmployeeWage
 {
-    public $IS_FULL_TIME = 1;
-    public $IS_PART_TIME = 0;
+     const  IS_FULL_TIME = 1;
+     const  IS_PART_TIME = 0;
+     public $numOfCompany = 0;
+     public $companyEmpWageArray=array();
+
+     /**
+      * function that accepting args and storing every arg inside the array.
+      */
+     public function addCompanyEmpWage($companyName, $monthWorkingHours, $workingDays, $wagePerHr)
+     {
+         $this->companyEmpWageArray[$this->numOfCompany++] = new CompanyDetails($companyName, $monthWorkingHours, $workingDays, $wagePerHr);
+     }
+ 
+     public function computeEmpWage() 
+     {
+         for ($i=0; $i<$this->numOfCompany; $i++)
+         {
+             $obj=$this->companyEmpWageArray[$i];
+             $wage=self::calcEmployeeWage($obj);
+             echo "\nCompany : ".$obj->companyName." "."Total Emp Wage is : ".$wage;
+         }
+     }
    /**
     *Declaring a static function and checking the Employee
     *Attendance by using rand() function
     */
-   public function calcEmployeeWage($companyName,$wagePerHr,$workingDays)
+   public static function calcEmployeeWage($obj)
    {
     $empHrs = 0;
     $dailyWage = 0;
     $totalWage = 0;
     $totalWorkingHrs = 0;
+
     //calculating employee daily wage per month using switch.
-    for ($i=1; $i < $workingDays ; $i++) 
+    for ($i=1; $i < $obj -> workingDays ; $i++) 
     { 
-        $random = rand(0,1);
+        $random = rand(0,2);
         switch ($random) 
         {
-        case $this -> IS_FULL_TIME:
+        case self :: IS_FULL_TIME:
             $empHrs = 8;
             break;
-        case $this -> IS_PART_TIME:
+        case self :: IS_PART_TIME:
             $empHrs = 4;
             break;
         default:
@@ -30,24 +52,22 @@ class EmployeeWage
         }
 
         //Calculating wage till this condition.
-        if($totalWorkingHrs >= 100 || $i == 20)
+        if($totalWorkingHrs >= $obj -> monthWorkingHrs || $i == $obj -> workingDays)
         {
             break;
         }
-        $dailyWage = $wagePerHr * $empHrs;
+        $dailyWage = $obj -> wagePerHr * $empHrs;
         $totalWage += $dailyWage;
         $totalWorkingHrs += $empHrs;
     }
-
-    //Associative array
-    $details = array("Company" => $companyName,"Total Working Days" => $i,"Total Working Hours " => $totalWorkingHrs,"Salary Per Month" => $totalWage);
-    print_r($details);
-    }
+    return $totalWage;
+  }
 }
 #calling the function by using object.
-$empWage = new EmployeeWage();
-$empWage -> calcEmployeeWage("Adani","20","20");
-$empWage -> calcEmployeeWage("Winspun","15","18");
-$empWage -> calcEmployeeWage("HP","10","13");
-$empWage -> calcEmployeeWage("jio","18","25");
-?>
+$empWageBuilder = new EmployeeWage();
+$empWageBuilder->addCompanyEmpWage("JIO", 100, 25, 20);
+$empWageBuilder->addCompanyEmpWage("AIRTEL", 80, 20, 25);
+$empWageBuilder->addCompanyEmpWage("WB", 50, 20, 100);
+$empWageBuilder->computeEmpWage();
+ 
+?>  
