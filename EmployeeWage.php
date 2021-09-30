@@ -1,6 +1,12 @@
 <?php
 include 'EmployeeDetails.php';
-class EmployeeWage
+include 'InterfaceEmployeeWage.php';
+
+/**
+ * Class which is implementing the interface and having 
+ * the funcctions which leads to calculate Employee Wage.
+ */
+class EmployeeWage implements InterfaceEmpWage
 {
      const  IS_FULL_TIME = 1;
      const  IS_PART_TIME = 0;
@@ -70,4 +76,4 @@ $empWageBuilder->addCompanyEmpWage("AIRTEL", 80, 20, 25);
 $empWageBuilder->addCompanyEmpWage("WB", 50, 20, 100);
 $empWageBuilder->computeEmpWage();
  
-?>  
+?>
