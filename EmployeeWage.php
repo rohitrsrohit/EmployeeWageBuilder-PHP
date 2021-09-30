@@ -26,7 +26,7 @@ class EmployeeWage implements InterfaceEmpWage
          foreach ( $this->companyEmpWageArray as $key => $value)
          {
              $wage=self::calcEmployeeWage($value);
-             echo "\nCompany : ".$key." "."Total Emp Wage is : ".$wage;
+             echo "Company : ".$key." "."Total Emp Wage is : ".$wage."\n\n";
          }
      }
    /**
@@ -39,7 +39,7 @@ class EmployeeWage implements InterfaceEmpWage
     $dailyWage = 0;
     $totalWage = 0;
     $totalWorkingHrs = 0;
-
+    $dailyWage = array();
     //calculating employee daily wage per month using switch.
     for ($i=1; $i < $obj -> workingDays ; $i++) 
     { 
@@ -61,9 +61,14 @@ class EmployeeWage implements InterfaceEmpWage
         {
             break;
         }
-        $dailyWage = $obj -> wagePerHr * $empHrs;
-        $totalWage += $dailyWage;
+        $dailyWage[$i] = $obj -> wagePerHr * $empHrs;
+        $totalWage += $dailyWage[$i];
         $totalWorkingHrs += $empHrs;
+    }
+
+    foreach($dailyWage as $key => $value)
+    {
+        echo "Day : ".$key." Wage : ".$value."\n";
     }
     return $totalWage;
   }
