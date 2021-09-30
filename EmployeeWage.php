@@ -47,4 +47,7 @@ class EmployeeWage
 #calling the function by using object.
 $empWage = new EmployeeWage();
 $empWage -> calcEmployeeWage("Adani","20","20");
+$empWage -> calcEmployeeWage("Winspun","15","18");
+$empWage -> calcEmployeeWage("HP","10","13");
+$empWage -> calcEmployeeWage("jio","18","25");
 ?>
